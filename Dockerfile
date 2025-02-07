@@ -1,8 +1,8 @@
 # Usa la imagen oficial de Node.js
 FROM node:18-alpine
 
-# Establece el directorio de trabajo dentro del contenedor
-WORKDIR /home/edwilk19/app
+# Establece el directorio de trabajo dentro del contenedor (cambia la ruta para que sea consistente con la ubicación de tus archivos)
+WORKDIR /home/edwilk19/astrome-doc
 
 # Copia los archivos del proyecto al contenedor
 COPY . .
