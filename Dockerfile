@@ -1,20 +1,23 @@
-# Usa la imagen oficial de Node.js
+# Usar una imagen base de Node.js
 FROM node:18-alpine
 
-# Establece el directorio de trabajo dentro del contenedor (cambia la ruta para que sea consistente con la ubicación de tus archivos)
-WORKDIR /home/edwilk19/astrome-doc
+# Establecer el directorio de trabajo dentro del contenedor
+WORKDIR /app
 
-# Copia los archivos del proyecto al contenedor
-COPY . .
+# Copiar el package.json y package-lock.json
+COPY package*.json ./
 
-# Instala Astro globalmente
-RUN npm install -g astro
-
-# Instala las dependencias del proyecto
+# Instalar dependencias
 RUN npm install
 
-# Expone el puerto que usará el servidor
-EXPOSE 3000
+# Copiar el resto del proyecto
+COPY . .
+
+# Construir la aplicación
+RUN npm run build
+
+# Exponer el puerto en el que corre Astro (por defecto es 4321)
+EXPOSE 4321
 
 # Comando para iniciar el servidor
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "preview", "--", "--host"]
